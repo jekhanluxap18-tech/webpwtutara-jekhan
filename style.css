@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+/* Designing a modern, professional GIS navigation theme */
+:root {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --primary: #14b8a6;
+  --primary-foreground: #ffffff;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #2dd4bf;
+  --border: rgba(255, 255, 255, 0.1);
+  --radius: 0.5rem;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  scroll-behavior: smooth;
+}
+
+/* Unified Navigation Styles */
+.nav-container {
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(15, 23, 42, 0.95);
+}
+
+.nav-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: white;
+  transition: opacity 0.3s ease;
+}
+
+.nav-brand:hover {
+  opacity: 0.9;
+}
+
+.nav-brand img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.nav-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-brand-text span {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.nav-brand-text .accent {
+  color: var(--primary);
+}
+
+/* Desktop Menu */
+.nav-menu-desktop {
+  display: none;
+  align-items: center;
+  gap: 40px;
+}
+
+@media (min-width: 1024px) {
+  .nav-menu-desktop {
+    display: flex;
+  }
+}
+
+/* Mobile Menu Button */
+.nav-mobile-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  border-radius: 9999px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-mobile-btn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-mobile-btn svg,
+.nav-mobile-btn i {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+}
+
+@media (min-width: 1024px) {
+  .nav-mobile-btn {
+    display: none;
+  }
+}
+
+/* Mobile Menu */
+.nav-menu-mobile {
+  display: none;
+  background-color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.nav-menu-mobile.active {
+  display: block;
+  max-height: 400px;
+  padding: 1.5rem;
+  opacity: 1;
+}
+
+@media (min-width: 1024px) {
+  .nav-menu-mobile {
+    display: none !important;
+  }
+}
+
+.nav-menu-mobile a {
+  display: block;
+  padding: 12px 0;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color 0.3s ease;
+}
+
+.nav-menu-mobile a:last-child {
+  border-bottom: none;
+}
+
+.nav-menu-mobile a:hover {
+  color: white;
+}
+
+.nav-menu-mobile a.active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Nav Links */
+.nav-link {
+  color: var(--muted-foreground);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+.nav-link.active {
+  color: var(--foreground);
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary);
+  box-shadow: 0 0 8px var(--primary);
+}
+
+/* Added improved mobile menu transition and overlay styling */
+#mobile-menu {
+  background-color: var(--muted);
+  border-top: 1px solid var(--border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+#mobile-menu:not(.hidden) {
+  display: block;
+  max-height: 500px;
+  opacity: 1;
+  padding: 1.5rem;
+}
+
+#mobile-menu.hidden {
+  display: block; /* Keep in DOM for transition */
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  pointer-events: none;
+}
+
+.bg-navy-dark {
+  background-color: #0f172a;
+}
+.bg-navy-light {
+  background-color: #1e293b;
+}
+.text-teal-accent {
+  color: #14b8a6;
+}
+.bg-teal-accent {
+  background-color: #14b8a6;
+}
+.border-teal-accent {
+  border-color: #14b8a6;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}

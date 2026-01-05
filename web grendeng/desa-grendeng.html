@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="stylesheet" href="./resources/ol.css" />
+        <link rel="stylesheet" href="resources/fontawesome-all.min.css" />
+        <link href="resources/photon-geocoder-autocomplete.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="./resources/ol-layerswitcher.css" />
+        <link rel="stylesheet" href="./resources/qgis2web.css" />
+        <link rel="stylesheet" href="../style.css" />
+
+        <title>Peta Desa Grendeng</title>
+
+        <style>
+            :root{
+                --navy-dark:#0f172a;
+                --navy:#0b1220;
+                --muted:#eef0f2;
+                --card:#ffffff;
+                --accent:#14b8a6;
+                --shadow: 0 6px 18px rgba(12,12,18,0.08);
+            }
+            html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+            .site-header{background:linear-gradient(180deg, var(--navy-dark), var(--navy));color:#fff;padding:28px 0}
+            .container{max-width:1220px;margin:0 auto;padding:0 24px}
+
+            .hero{padding:28px 0 40px}
+            .hero h1{margin:0;font-size:36px}
+            .hero p{margin:8px 0 0;color:rgba(255,255,255,0.75)}
+
+            main{padding:30px 0 80px;background:#f5f7f8}
+            .grid{display:flex;gap:28px}
+            .col-left{width:380px;flex-shrink:0}
+            .col-right{flex:1}
+
+            .card{background:var(--card);border-radius:12px;padding:22px;box-shadow:var(--shadow);margin-bottom:22px;border:1px solid rgba(15,23,42,0.03)}
+            .card h3{margin:0;font-size:18px;display:flex;align-items:center;gap:10px}
+            .muted{color:#6b7280;font-size:14px}
+
+            .info-list{margin-top:14px;border-top:1px solid #eef2f6;padding-top:14px}
+            .info-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid #f4f6f7}
+            .info-row:last-child{border-bottom:0}
+            .total{color:var(--accent);font-weight:600}
+
+            .map-card{display:flex;flex-direction:column;height:560px}
+            .map-card .card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #eef2f6}
+            .map-frame{flex:1;position:relative;background:#e9ecef;border-radius:0 0 10px 10px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+            #map{width:100%;height:100%}
+
+            .legend{position:absolute;left:18px;bottom:18px;background:#fff;padding:10px;border-radius:8px;box-shadow:0 6px 18px rgba(12,12,18,0.08);font-size:13px;z-index:1000}
+            .legend .item{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+            .legend .dot{width:10px;height:10px;border-radius:50%}
+
+            /* Custom Style untuk Fullscreen Button */
+            .ol-full-screen {
+                top: 10px !important;
+                right: 10px !important;
+            }
+            .ol-full-screen button {
+                background-color: var(--accent) !important;
+                border-radius: 4px !important;
+                cursor: pointer;
+            }
+
+            /* Added description section styling */
+            .description-card {
+                background: var(--card);
+                border-radius: 12px;
+                padding: 22px;
+                box-shadow: var(--shadow);
+                margin-bottom: 22px;
+                border: 1px solid rgba(15,23,42,0.03);
+            }
+            .description-card h3 {
+                margin: 0 0 16px 0;
+                font-size: 18px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: var(--navy-dark);
+            }
+            .description-card p {
+                color: #4b5563;
+                font-size: 14px;
+                line-height: 1.7;
+                margin: 0 0 12px 0;
+            }
+            .description-card ul {
+                list-style: none;
+                padding: 0;
+                margin: 16px 0 0 0;
+            }
+            .description-card li {
+                padding: 8px 0;
+                border-bottom: 1px solid #f4f6f7;
+                font-size: 14px;
+                color: #4b5563;
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .description-card li:last-child {
+                border-bottom: none;
+            }
+            .description-card li i {
+                color: var(--accent);
+                margin-top: 2px;
+            }
+
+            @media (max-width:980px){
+                .grid{flex-direction:column}
+                .col-left{width:100%}
+                .map-card{height:420px}
+            }
+
+            /* Override mobile menu style to match dark navy theme */
+            .nav-menu-mobile {
+                background: var(--navy-dark) !important;
+            }
+            .nav-menu-mobile a {
+                color: #fff !important;
+            }
+            .nav-menu-mobile a:hover {
+                color: var(--accent) !important;
+            }
+            .nav-menu-mobile a.active {
+                color: var(--accent) !important;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="nav-container sticky top-0 z-50 shadow-sm" style="position: sticky; top: 0; z-index: 50;">
+            <div class="nav-wrapper">
+                <div class="nav-content">
+                    <a href="../index.html" class="nav-brand">
+                        <img src="../img/logobanyumas1.png" alt="Logo">
+                        <div class="nav-brand-text">
+                            <span>KABUPATEN</span>
+                            <span class="accent">BANYUMAS</span>
+                        </div>
+                    </a>
+                    
+                    <div class="nav-menu-desktop">
+                        <a href="../index.html" class="nav-link">Beranda</a>
+                        <a href="../kec-pwt-utara/peta-kecamatan.html" class="nav-link">Peta Kecamatan</a>
+                        <a href="desa-grendeng.html" class="nav-link active">Peta Desa</a>
+                        <a href="../data-statistik.html" class="nav-link">Data Statistik</a>
+                        <a href="../tentang-saya.html" class="nav-link">Tentang Saya</a>
+                    </div>
+
+                    <button id="mobile-menu-btn" class="nav-mobile-btn" aria-label="Toggle menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="mobile-menu" class="nav-menu-mobile">
+                <a href="../index.html">Beranda</a>
+                <a href="../kec-pwt-utara/peta-kecamatan.html">Peta Kecamatan</a>
+                <a href="desa-grendeng.html" class="active">Peta Desa</a>
+                <a href="../data-statistik.html">Data Statistik</a>
+                <a href="../tentang-saya.html">Tentang Saya</a>
+            </div>
+        </nav>
+
+
+        <header class="site-header" style="background: var(--navy); padding-top: 20px;">
+            <div class="container hero">
+                <h1>Peta Desa Grendeng</h1>
+                <p>Informasi detail wilayah dan peta Kelurahan Grendeng</p>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                <div class="grid">
+                    <aside class="col-left">
+                        
+
+                        <!-- Added description about Grendeng -->
+                        <section class="description-card">
+                            <h3><span style="display:inline-block;background:#e6f6f3;border-radius:8px;padding:6px;margin-right:8px;color:var(--accent)"><i class="fas fa-book-open"></i></span> Tentang Grendeng</h3>
+                            <p>
+                                Kelurahan Grendeng merupakan salah satu kelurahan yang terletak di Kecamatan Purwokerto Utara, Kabupaten Banyumas, Provinsi Jawa Tengah. Wilayah ini dikenal sebagai kawasan pendidikan karena terdapat kampus Universitas Jenderal Soedirman (UNSOED).
+                            </p>
+                            <p>
+                                Grendeng memiliki karakteristik sebagai kawasan urban dengan aktivitas ekonomi yang dinamis, terutama sektor perdagangan dan jasa yang melayani kebutuhan mahasiswa dan masyarakat sekitar.
+                            </p>
+                            <ul>
+                                <li><i class="fas fa-university"></i> Lokasi kampus UNSOED</li>
+                                <li><i class="fas fa-store"></i> Pusat perdagangan dan kuliner</li>
+                                <li><i class="fas fa-home"></i> Kawasan pemukiman padat penduduk</li>
+                                <li><i class="fas fa-bus"></i> Akses transportasi publik yang baik</li>
+                            </ul>
+                        </section>
+                    </aside>
+
+                    <section class="col-right">
+                        <div class="card map-card">
+                            <div class="card-head">
+                                <div style="display:flex;align-items:center;gap:10px"><i class="fas fa-map-marker-alt" style="color:var(--accent)"></i><strong>Peta Lokasi Grendeng</strong></div>
+                                <div style="opacity:0.7; font-size: 12px;">Gunakan tombol di pojok kanan peta untuk Fullscreen</div>
+                            </div>
+                            <div class="map-frame" id="map-container">
+                                <div id="map"></div>
+                                <div class="legend">
+                                    <div class="item"><span class="dot" style="background:#ef4444"></span>Kantor Kelurahan</div>
+                                    <div class="item"><span class="dot" style="background:#3b82f6"></span>Fasilitas Pendidikan</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <script src="resources/qgis2web_expressions.js"></script>
+        <script src="./resources/functions.js"></script>
+        <script src="./resources/ol.js"></script>
+        <script src="./resources/ol-layerswitcher.js"></script>
+        <script src="resources/photon-geocoder-autocomplete.min.js"></script>
+        <script src="layers/DesaGrendeng_1.js"></script>
+        <script src="layers/Rw_2.js"></script>
+        <script src="layers/BalaidesaGrendeng_3.js"></script>
+        <script src="layers/rumahsaya_4.js"></script>
+        <script src="layers/sekolah_5.js"></script>
+        <script src="layers/GORlapangannbola_6.js"></script>
+        <script src="layers/RumahTetangga_7.js"></script>
+        <script src="styles/DesaGrendeng_1_style.js"></script>
+        <script src="styles/Rw_2_style.js"></script>
+        <script src="styles/BalaidesaGrendeng_3_style.js"></script>
+        <script src="styles/rumahsaya_4_style.js"></script>
+        <script src="styles/sekolah_5_style.js"></script>
+        <script src="styles/GORlapangannbola_6_style.js"></script>
+        <script src="styles/RumahTetangga_7_style.js"></script>
+        <script src="./layers/layers.js" type="text/javascript"></script>
+        <script src="./resources/Autolinker.min.js"></script>
+        <script src="./resources/qgis2web.js"></script>
+
+        <script>
+            // Fullscreen Control
+            (function() {
+                function addFullScreenControl() {
+                    if (typeof map !== 'undefined') {
+                        var fsControl = new ol.control.FullScreen();
+                        map.addControl(fsControl);
+                    } else {
+                        setTimeout(addFullScreenControl, 500);
+                    }
+                }
+                addFullScreenControl();
+            })();
+
+            // Mobile menu toggle
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if(menuBtn) {
+                menuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                });
+            }
+        </script>
+    </body>
+</html>

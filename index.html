@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webiste Kecamatan Purwokerto Utara - Kabupaten Banyumas</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            dark: '#0f172a',
+                            light: '#1e293b'
+                        },
+                        teal: {
+                            accent: '#14b8a6',
+                            light: '#2dd4bf'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-navy-dark font-sans">
+    <!-- Updated Navigation with consistent responsive design -->
+    <nav class="nav-container sticky top-0 z-50 shadow-sm">
+        <div class="nav-wrapper">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <img src="img/logobanyumas1.png" alt="Logo">
+                    <div class="nav-brand-text">
+                        <span>KABUPATEN</span>
+                        <span class="accent">BANYUMAS</span>
+                    </div>
+                </a>
+                
+                <div class="nav-menu-desktop">
+                    <a href="index.html" class="nav-link active">Beranda</a>
+                    <a href="kec-pwt-utara/peta-kecamatan.html" class="nav-link">Peta Kecamatan</a>
+                    <a href="web grendeng/desa-grendeng.html" class="nav-link">Peta Desa</a>
+                    <a href="data-statistik.html" class="nav-link">Data Statistik</a>
+                    <a href="tentang-saya.html" class="nav-link">Tentang Saya</a>
+                </div>
+
+                <button id="mobile-menu-btn" class="nav-mobile-btn" aria-label="Toggle menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="nav-menu-mobile">
+            <a href="index.html" class="active">Beranda</a>
+            <a href="kec-pwt-utara/peta-kecamatan.html">Peta Kecamatan</a>
+            <a href="web grendeng/desa-grendeng.html">Peta Desa</a>
+            <a href="data-statistik.html">Data Statistik</a>
+            <a href="tentang-saya.html">Tentang Saya</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-navy-dark text-white pt-12 pb-24 relative overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="inline-block px-4 py-1.5 bg-teal-accent/20 border border-teal-accent/30 rounded-full text-teal-accent text-sm font-semibold uppercase">
+                        Layanan Kami
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight uppercase">
+                        KECAMATAN <br>
+                        <span class="text-teal-accent">PURWOKERTO UTARA</span>
+                    </h1>
+                    <p class="text-lg text-white/80 max-w-xl">
+                        Mewujudkan transparansi tata kelola wilayah melalui integrasi data kependudukan dan pemetaan batas daerah yang akurat.
+                    </p>
+                    <div class="flex flex-wrap gap-8 items-center">
+                        <button onclick="openModal()" class="bg-teal-accent hover:bg-teal-light px-8 py-4 rounded font-bold shadow-lg transition-all">
+                            Selengkapnya Profil Kecamatan
+                        </button>
+                        <div class="flex gap-8 pl-4 border-l border-white/20">
+                            <div><div class="text-2xl font-bold">48.497</div><div class="text-sm text-white/60">Penduduk</div></div>
+                            <div><div class="text-2xl font-bold">9,01 km²</div><div class="text-sm text-white/60">Luas Wilayah</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camat Card -->
+                <div class="bg-white text-navy-dark rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+                    <div class="md:w-1/2">
+                        <img src="img/fotocamat.png" alt="Camat" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 md:w-1/2 space-y-4">
+                        <h2 class="text-2xl font-bold">Drs. Dwi Nur Wijayanto, MPP., M.Eng</h2>
+                        <p class="text-teal-accent font-bold">Camat Purwokerto Utara</p>
+                        <div class="space-y-2 text-sm pt-4 border-t">
+                            <p><span class="text-gray-400 block uppercase font-bold text-[10px]">Nama Camat</span> Drs. Dwi Nur Wijayanto</p>
+                            <p><span class="text-gray-400 block uppercase font-bold text-[10px]"></span> </p>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Camat memimpin tata kelola di 7 kelurahan, berkoordinasi dengan unsur pemerintah serta memajukan pelayanan publik di wilayah Purwokerto Utara.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gray-50" style="clip-path: ellipse(70% 100% at 50% 100%)"></div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="container mx-auto px-4 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <a href="peta-kecamatan.html" class="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition-all group">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-teal-accent/10 rounded-lg flex items-center justify-center text-teal-accent group-hover:bg-teal-accent group-hover:text-white transition-all">
+                        <i data-lucide="map" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2">Peta Kecamatan</h3>
+                        <p class="text-gray-600 text-sm">Peta Kecamatan</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="peta-desa.html" class="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition-all group">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-teal-accent/10 rounded-lg flex items-center justify-center text-teal-accent group-hover:bg-teal-accent group-hover:text-white transition-all">
+                        <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2">Peta Desa</h3>
+                        <p class="text-gray-600 text-sm">Peta Desa</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="data-statistik.html" class="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition-all group">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-teal-accent/10 rounded-lg flex items-center justify-center text-teal-accent group-hover:bg-teal-accent group-hover:text-white transition-all">
+                        <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2">Profil Statistik</h3>
+                        <p class="text-gray-600 text-sm">Daerah Wilayahan</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h2 class="text-3xl font-bold text-navy-dark">Profil Kecamatan Purwokerto Utara</h2>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-6 text-gray-700">
+                    <div>
+                        <h3 class="font-bold text-xl text-navy-dark mb-2">Visi</h3>
+                        <p class="leading-relaxed">Terwujudnya Kecamatan Purwokerto Utara yang Maju, Sejahtera, dan Berbudaya melalui Pelayanan Publik yang Prima dan Transparan.</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-bold text-xl text-navy-dark mb-2">Misi</h3>
+                        <ul class="list-decimal list-inside space-y-2 leading-relaxed">
+                            <li>Meningkatkan kualitas pelayanan publik yang cepat, mudah, dan transparan</li>
+                            <li>Mengembangkan sistem informasi dan digitalisasi layanan kecamatan</li>
+                            <li>Memberdayakan masyarakat dalam pembangunan daerah</li>
+                            <li>Menjaga ketertiban dan keamanan wilayah kecamatan</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 pt-4 border-t">
+                        <div>
+                            <p class="text-sm text-gray-500">Jumlah Kelurahan</p>
+                            <p class="text-2xl font-bold text-teal-accent">7 Kelurahan</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Luas Wilayah</p>
+                            <p class="text-2xl font-bold text-teal-accent">9,01 km²</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Jumlah Penduduk</p>
+                            <p class="text-2xl font-bold text-teal-accent">48.497</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">luas(ha)</p>
+                            <p class="text-2xl font-bold text-teal-accent">901</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                            <img src="img/logobanyumas.jpg" alt="Logo" class="w-8 h-8">
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Kabupaten</p>
+                            <p class="font-bold text-sm">Banyumas</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-white/60">Transformasi Digital: Memberdayakan Masyarakat, Mewujudkan Pelayanan Prima.</p>
+                </div>
+
+                <div>
+                    <h3 class="font-bold mb-4 text-teal-accent">Tautan Cepat</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="text-white/70 hover:text-white">Beranda</a></li>
+                        <li><a href="kec-pwt-utara/peta-kecamatan.html" class="text-white/70 hover:text-white">Peta Kecamatan</a></li>
+                        <li><a href="web grendeng/desa-grendeng.html" class="text-white/70 hover:text-white">Peta Desa</a></li>
+                        <li><a href="data-statistik.html" class="text-white/70 hover:text-white">Data Statistik</a></li>
+                        <li><a href="tentang-saya.html" class="text-white/70 hover:text-white">Tentang Saya</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-bold mb-4 text-teal-accent">Kontak Kami</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="map-pin" class="w-4 h-4 mt-1 text-teal-accent"></i>
+                            <span class="text-white/70">Jl. Prof. Dr. HR Bunyamin No. 3, Purwokerto</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="phone" class="w-4 h-4 text-teal-accent"></i>
+                            <span class="text-white/70">(0281) 635028</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="mail" class="w-4 h-4 text-teal-accent"></i>
+                            <span class="text-white/70">purwokertoutara@banyumaskab.go.id</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-bold mb-4 text-teal-accent">Ikuti Kami</h3>
+                    <div class="flex gap-3">
+                        <a href="https://www.facebook.com/share/16ZAt5VGAz/" class="w-10 h-10 bg-white/10 hover:bg-teal-accent rounded-full flex items-center justify-center transition-all">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://www.instagram.com/jluxayoup_._?igsh=bHltaGhvaHVuZ2d5" class="w-10 h-10 bg-white/10 hover:bg-teal-accent rounded-full flex items-center justify-center transition-all">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://youtube.com/@jekhanluxaputra4388?si=nQuEG8UOGXQzBMKb" class="w-10 h-10 bg-white/10 hover:bg-teal-accent rounded-full flex items-center justify-center transition-all">
+                            <i data-lucide="youtube" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                    <div class="mt-6 text-sm">
+                        <p class="text-teal-accent font-bold mb-1">JAM OPERASIONAL</p>
+                        <p class="text-white/70">Senin - Jumat: 07.30-15.00 WIB</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-6 text-center text-sm text-white/60">
+                <p>&copy; 2025 Kecamatan Purwokerto Utara. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Updated script for mobile menu toggle -->
+    <script>
+        lucide.createIcons();
+        
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        function openModal() {
+            document.getElementById('profileModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('profileModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('profileModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Saya - Purwokerto Utara</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { dark: '#0f172a', light: '#1e293b' },
+                        teal: { accent: '#14b8a6', light: '#2dd4bf' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="nav-container sticky top-0 z-50 shadow-sm">
+        <div class="nav-wrapper">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <img src="img/logobanyumas1.png" alt="Logo">
+                    <div class="nav-brand-text">
+                        <span>KABUPATEN</span>
+                        <span class="accent">BANYUMAS</span>
+                    </div>
+                </a>
+                
+                <div class="nav-menu-desktop">
+                    <a href="index.html" class="nav-link">Beranda</a>
+                    <a href="kec-pwt-utara/peta-kecamatan.html" class="nav-link">Peta Kecamatan</a>
+                    <a href="web grendeng/desa-grendeng.html" class="nav-link">Peta Desa</a>
+                    <a href="data-statistik.html" class="nav-link">Data Statistik</a>
+                    <a href="tentang-saya.html" class="nav-link active">Tentang Saya</a>
+                </div>
+
+                <button id="mobile-menu-btn" class="nav-mobile-btn" aria-label="Toggle menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="nav-menu-mobile">
+            <a href="index.html">Beranda</a>
+            <a href="kec-pwt-utara/peta-kecamatan.html">Peta Kecamatan</a>
+            <a href="web grendeng/desa-grendeng.html">Peta Desa</a>
+            <a href="data-statistik.html">Data Statistik</a>
+            <a href="tentang-saya.html" class="active">Tentang Saya</a>
+        </div>
+    </nav>
+
+    <!-- Header Background -->
+    <div class="bg-navy-dark h-64 md:h-80 w-full"></div>
+
+    <main class="container mx-auto px-4 -mt-32 pb-24">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <!-- Left: Profile Card -->
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <div class="h-32 bg-gradient-to-r from-teal-accent to-navy-dark"></div>
+                    <div class="px-8 pb-8">
+                        <div class="relative -mt-16 mb-6">
+                            <img src="img/fotoprofil.jpeg" alt="Profile Photo" class="w-32 h-32 rounded-2xl border-4 border-white object-cover shadow-lg mx-auto lg:mx-0">
+                        </div>
+                        <div class="text-center lg:text-left space-y-2">
+                            <h1 class="text-2xl font-bold text-navy-dark">Jekhan Nanda Luxa Putra</h1>
+                            <p class="text-teal-accent font-semibold tracking-wide uppercase text-xs"></p>
+                            <div class="flex flex-wrap justify-center lg:justify-start gap-2 pt-4">
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-bold text-gray-500">HTML5</span>
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-bold text-gray-500">Tailwind</span>
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-bold text-gray-500">JS Vanilla</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t bg-gray-50 p-6 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="mail" class="w-5 h-5 text-teal-accent"></i>
+                            <span class="text-sm text-gray-600">purwokertoutara@banyumaskab.go.id</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="globe" class="w-5 h-5 text-teal-accent"></i>
+                            <span class="text-sm text-gray-600">www.purwokertoutara.go.id</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Small -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                    <h3 class="font-bold text-navy-dark mb-4 flex items-center gap-2">
+                        <i data-lucide="message-square" class="w-5 h-5 text-teal-accent"></i>
+                        Hubungi Kami
+                    </h3>
+                    <form class="space-y-3">
+                        <input type="text" placeholder="Nama Anda" class="w-full px-4 py-2 bg-gray-50 border rounded-lg text-sm focus:ring-2 focus:ring-teal-accent outline-none">
+                        <textarea placeholder="Pesan Anda" rows="3" class="w-full px-4 py-2 bg-gray-50 border rounded-lg text-sm focus:ring-2 focus:ring-teal-accent outline-none"></textarea>
+                        <button class="w-full bg-teal-accent text-white font-bold py-2 rounded-lg hover:bg-teal-light transition-all text-sm">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right: About Content -->
+            <div class="lg:col-span-2 space-y-8">
+                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                    <h2 class="text-3xl font-bold text-navy-dark mb-6 border-b pb-4">Tentang Proyek Ini</h2>
+                    <div class="prose prose-teal max-w-none text-gray-600 leading-relaxed space-y-4">
+                        <p>
+                            Portal Web Kecamatan Purwokerto Utara dikembangkan sebagai inisiatif transformasi digital untuk mempermudah akses informasi publik bagi masyarakat Kabupaten Banyumas. Fokus utama kami adalah menyajikan data geografis (peta) dan statistik kependudukan yang akurat dan mudah dijangkau.
+                        </p>
+                        <p>
+                            Sesuai dengan visi "Purwokerto Utara Maju", website ini menggunakan teknologi web modern yang ringan namun fungsional, memastikan performa yang cepat bahkan di perangkat dengan spesifikasi rendah atau koneksi internet yang terbatas.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 bg-navy-dark text-teal-accent rounded-xl flex items-center justify-center">
+                                <i data-lucide="target" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="font-bold text-xl text-navy-dark">Tujuan Utama</h3>
+                            <p class="text-sm text-gray-500">Meningkatkan transparansi data wilayah dan mempermudah visualisasi sebaran penduduk di 7 kelurahan.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 bg-navy-dark text-teal-accent rounded-xl flex items-center justify-center">
+                                <i data-lucide="shield-check" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="font-bold text-xl text-navy-dark">Keamanan Data</h3>
+                            <p class="text-sm text-gray-500">Menjamin integritas informasi yang disajikan berasal dari sumber resmi Pemerintah Kabupaten Banyumas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer-like section inside main -->
+                <div class="flex flex-col md:flex-row justify-between items-center gap-6 p-8 bg-teal-accent/10 rounded-2xl border border-teal-accent/20">
+                    <div>
+                        <h4 class="font-bold text-navy-dark">Butuh Bantuan Teknis?</h4>
+                        <p class="text-sm text-gray-500">Tim kami siap membantu Anda 24/7 untuk masalah akses portal.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/jluxayoup_._?igsh=bHltaGhvaHVuZ2d5" class="p-3 bg-white rounded-full shadow-sm hover:text-teal-accent transition-all"><i data-lucide="instagram"></i></a>
+                        <a href="https://www.facebook.com/share/16ZAt5VGAz/" class="p-3 bg-white rounded-full shadow-sm hover:text-teal-accent transition-all"><i data-lucide="facebook"></i></a>
+                        <a href="https://youtube.com/@jekhanluxaputra4388?si=nQuEG8UOGXQzBMKb" class="p-3 bg-white rounded-full shadow-sm hover:text-teal-accent transition-all"><i data-lucide="youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-dark text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-xs text-white/30 tracking-widest uppercase">&copy; 2025 Kecamatan Purwokerto Utara - Bagian dari Transformasi Digital Banyumas</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

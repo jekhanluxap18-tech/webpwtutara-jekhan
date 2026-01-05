@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Statistik - Purwokerto Utara</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { dark: '#0f172a', light: '#1e293b' },
+                        teal: { accent: '#14b8a6', light: '#2dd4bf' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="nav-container sticky top-0 z-50 shadow-sm">
+        <div class="nav-wrapper">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <img src="img/logobanyumas1.png" alt="Logo">
+                    <div class="nav-brand-text">
+                        <span>KABUPATEN</span>
+                        <span class="accent">BANYUMAS</span>
+                    </div>
+                </a>
+                
+                <div class="nav-menu-desktop">
+                    <a href="index.html" class="nav-link">Beranda</a>
+                    <a href="kec-pwt-utara/peta-kecamatan.html" class="nav-link">Peta Kecamatan</a>
+                    <a href="web grendeng/desa-grendeng.html" class="nav-link">Peta Desa</a>
+                    <a href="data-statistik.html" class="nav-link active">Data Statistik</a>
+                    <a href="tentang-saya.html" class="nav-link">Tentang Saya</a>
+                </div>
+
+                <button id="mobile-menu-btn" class="nav-mobile-btn" aria-label="Toggle menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="nav-menu-mobile">
+            <a href="index.html">Beranda</a>
+            <a href="kec-pwt-utara/peta-kecamatan.html">Peta Kecamatan</a>
+            <a href="web grendeng/desa-grendeng.html">Peta Desa</a>
+            <a href="data-statistik.html" class="active">Data Statistik</a>
+            <a href="tentang-saya.html">Tentang Saya</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-navy-dark text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 uppercase">Data Statistik Wilayah</h1>
+            <p class="text-teal-accent text-lg md:text-xl font-medium">Jumlah Penduduk Kecamatan Purwokerto Utara 31 Desember 2024</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 -mt-10 mb-20">
+        <!-- Main Stats Card -->
+        <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-10">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 bg-teal-accent/10 rounded-2xl flex items-center justify-center text-teal-accent">
+                        <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-navy-dark leading-tight">Grafik Jumlah Penduduk</h2>
+                        <p class="text-sm text-gray-500 uppercase tracking-wider font-bold">Kecamatan Purwokerto Utara</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-6 py-3 rounded-full border border-gray-100 flex items-center gap-3">
+                    <span class="w-3 h-3 bg-teal-accent rounded-full shadow-[0_0_8px_rgba(20,184,166,0.5)]"></span>
+                    <span class="text-sm font-bold text-navy-dark">Desa Sumampir (10.385 Jiwa)</span>
+                </div>
+            </div>
+
+            <div class="relative h-[400px] md:h-[500px]">
+                <canvas id="populasiChart"></canvas>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 flex items-center gap-4 group hover:bg-teal-accent/5 hover:border-teal-accent/20 transition-all">
+                    <div class="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center text-teal-accent">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-400 uppercase font-bold tracking-widest">Total Penduduk</p>
+                        <p class="text-2xl font-black text-navy-dark">48.497</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 flex items-center gap-4 group hover:bg-teal-accent/5 hover:border-teal-accent/20 transition-all">
+                    <div class="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center text-teal-accent">
+                        <i data-lucide="user-plus"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-400 uppercase font-bold tracking-widest">Rata-rata/Desa</p>
+                        <p class="text-2xl font-black text-navy-dark">8,214</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 flex items-center gap-4 group hover:bg-teal-accent/5 hover:border-teal-accent/20 transition-all">
+                    <div class="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center text-teal-accent">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-400 uppercase font-bold tracking-widest">Desa Terbanyak</p>
+                        <p class="text-2xl font-black text-teal-accent">Sumampir</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-dark text-white py-16">
+        <div class="container mx-auto px-4 flex flex-col items-center text-center">
+            <div class="flex items-center gap-3 mb-8">
+                <img src="img/logobanyumas.jpg" class="w-12 h-12">
+                <div class="text-left">
+                    <p class="text-sm font-black uppercase tracking-tighter leading-none">Kabupaten</p>
+                    <p class="text-sm font-black uppercase tracking-tighter leading-none">Banyumas</p>
+                </div>
+            </div>
+            <p class="text-white/40 text-sm max-w-lg mb-8 leading-relaxed italic">"Data yang akurat adalah kunci pelayanan publik yang tepat sasaran."</p>
+            <div class="w-full h-px bg-white/10 mb-8"></div>
+            <p class="text-xs text-white/30 tracking-widest uppercase">&copy; 2025 Kecamatan Purwokerto Utara - Portal Data Terpadu</p>
+        </div>
+    </footer>
+
+    <!-- Updated script for mobile menu toggle -->
+    <script>
+        lucide.createIcons();
+        
+        // Mobile menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+
+        // Chart configuration
+        const ctx = document.getElementById('populasiChart').getContext('2d');
+        const data = [10385, 6925, 9289, 6308, 2954, 4755, 7881];
+        const labels = ['Desa Sumampir', 'Desa Grendeng', 'Desa Bancarkembar', 'Desa Bobosan', 'Desa Karangwangkal', 'Desa Pabuaran', 'Desa Purwanegara'];
+        
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Jumlah Penduduk',
+                    data: data,
+                    backgroundColor: (context) => {
+                        const index = context.dataIndex;
+                        return index === 0 ? '#14b8a6' : 'rgba(20, 184, 166, 0.2)';
+                    },
+                    borderColor: '#14b8a6',
+                    borderWidth: (context) => context.dataIndex === 0 ? 0 : 2,
+                    borderRadius: 8,
+                    hoverBackgroundColor: '#2dd4bf',
+                    hoverBorderColor: '#14b8a6'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#0f172a',
+                        titleFont: { size: 14, weight: 'bold' },
+                        bodyFont: { size: 14 },
+                        padding: 12,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            label: (context) => `Populasi: ${context.raw.toLocaleString('id-ID')} Jiwa`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(0,0,0,0.05)', drawBorder: false },
+                        ticks: { color: '#64748b', font: { weight: 'bold' } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#0f172a', font: { weight: 'bold', size: 12 } }
+                    }
+                },
+                animation: { duration: 2000, easing: 'easeOutQuart' }
+            }
+        });
+    </script>
+</body>
+</html>

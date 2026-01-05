@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peta Kecamatan - Website Kecamatan Purwokerto Utara</title>
+  <meta name="description" content="Peta interaktif Kecamatan Purwokerto Utara">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            primary: '#14b8a6',
+            'primary-dark': '#059669',
+            dark: '#0f172a',
+            'dark-light': '#1e293b',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="./resources/ol.css">
+  <link rel="stylesheet" href="resources/fontawesome-all.min.css">
+  <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
+  <link rel="stylesheet" href="./resources/qgis2web.css">
+  <style>
+    #map {
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+    }
+
+    .ol-control {
+      background-color: rgba(255, 255, 255, 0.9) !important;
+      border-radius: 8px !important;
+    }
+  </style>
+</head>
+
+<body class="font-sans bg-slate-100 text-slate-800">
+
+  <!-- Updated Navigation with consistent responsive design -->
+  <nav class="nav-container sticky top-0 z-50 shadow-sm">
+    <div class="nav-wrapper">
+      <div class="nav-content">
+        <a href="../index.html" class="nav-brand">
+          <img src="../img/logobanyumas1.png" alt="Logo">
+          <div class="nav-brand-text">
+            <span>KABUPATEN</span>
+            <span class="accent">BANYUMAS</span>
+          </div>
+        </a>
+        
+        <div class="nav-menu-desktop">
+          <a href="../index.html" class="nav-link">Beranda</a>
+          <a href="peta-kecamatan.html" class="nav-link active">Peta Kecamatan</a>
+          <a href="../web grendeng/desa-grendeng.html" class="nav-link">Peta Desa</a>
+          <a href="../data-statistik.html" class="nav-link">Data Statistik</a>
+          <a href="../tentang-saya.html" class="nav-link">Tentang Saya</a>
+        </div>
+
+        <button id="mobile-menu-btn" class="nav-mobile-btn" aria-label="Toggle menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div id="mobile-menu" class="nav-menu-mobile">
+      <a href="../index.html">Beranda</a>
+      <a href="peta-kecamatan.html" class="active">Peta Kecamatan</a>
+      <a href="../web grendeng/desa-grendeng.html">Peta Desa</a>
+      <a href="../data-statistik.html">Data Statistik</a>
+      <a href="../tentang-saya.html">Tentang Saya</a>
+    </div>
+  </nav>
+
+
+  <!-- Page Header -->
+  <section class="pt-28 pb-8 bg-gradient-to-br from-dark via-dark-light to-dark relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-20 left-20 w-72 h-72 bg-primary rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 right-20 w-96 h-96 bg-teal-500 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 lg:px-8 relative z-10">
+      <div class="max-w-3xl">
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 text-primary text-sm font-semibold mb-4">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+          </svg>
+          PETA INTERAKTIF
+        </span>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3">
+          Peta <span class="text-primary">Kecamatan</span>
+        </h1>
+        <p class="text-slate-300 leading-relaxed">
+          Eksplorasi batas wilayah Kecamatan Purwokerto Utara secara interaktif
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="py-8">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="grid lg:grid-cols-4 gap-6">
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-1 space-y-6">
+          <!-- Navigation Card -->
+          <div class="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-primary">
+            <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              Navigasi Peta
+            </h2>
+
+            <div class="space-y-3">
+              <label
+                class="flex items-center gap-3 p-3 bg-primary/10 rounded-xl cursor-pointer border-2 border-primary transition-all">
+                <input type="radio" name="view" id="viewKec" checked class="w-4 h-4 text-primary"
+                  onclick="toggleLayer('Kecamatan')">
+                <span class="font-medium text-slate-700">Peta Kecamatan</span>
+              </label>
+            </div>
+
+            <div class="mt-6">
+              <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Pilih Desa</p>
+              <div class="space-y-2">
+                <label
+                  class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 transition-all border border-slate-200">
+                  <input type="checkbox" class="desa-check w-4 h-4 text-primary rounded" value="Grendeng"
+                    onchange="updateView()">
+                  <span class="text-sm text-slate-600">Desa Grendeng</span>
+                </label>
+                <label
+                  class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 transition-all border border-slate-200">
+                  <input type="checkbox" class="desa-check w-4 h-4 text-primary rounded" value="Karangwangkal"
+                    onchange="updateView()">
+                  <span class="text-sm text-slate-600">Karangwangkal</span>
+                </label>
+                <label
+                  class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 transition-all border border-slate-200">
+                  <input type="checkbox" class="desa-check w-4 h-4 text-primary rounded" value="Bancarkembar"
+                    onchange="updateView()">
+                  <span class="text-sm text-slate-600">Bancarkembar</span>
+                </label>
+                <label
+                  class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 transition-all border border-slate-200">
+                  <input type="checkbox" class="desa-check w-4 h-4 text-primary rounded" value="Pabuaran"
+                    onchange="updateView()">
+                  <span class="text-sm text-slate-600">Pabuaran</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info Card -->
+          <div class="bg-gradient-to-br from-primary to-teal-500 rounded-2xl shadow-lg p-6 text-white">
+            <h3 class="font-bold mb-2">Tips Penggunaan</h3>
+            <p class="text-sm text-white/80 leading-relaxed">
+              Gunakan scroll mouse untuk zoom in/out. Klik dan tahan untuk menggeser peta.
+            </p>
+          </div>
+        </div>
+
+        <!-- Map Area -->
+        <div class="lg:col-span-3">
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <!-- Map Header -->
+            <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-bold text-slate-800">Peta Lokasi</p>
+                  <p class="text-xs text-slate-500" id="activeLocText">Kecamatan Purwokerto Utara</p>
+                </div>
+              </div>
+              <button onclick="toggleFullScreen()"
+                class="px-4 py-2 bg-slate-100 hover:bg-primary hover:text-white rounded-xl text-sm font-medium transition-all flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                </svg>
+                Full Screen
+              </button>
+            </div>
+
+            <!-- Map Container -->
+            <div id="map" style="height: 600px;">
+              <div id="popup" class="ol-popup">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark py-8 mt-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-slate-500 text-sm">&copy; 2025 Pemerintah Kecamatan Purwokerto Utara</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="resources/qgis2web_expressions.js"></script>
+  <script src="./resources/functions.js"></script>
+  <script src="./resources/ol.js"></script>
+  <script src="./resources/ol-layerswitcher.js"></script>
+  <script src="layers/purwanegara_1.js"></script>
+  <script src="layers/Desa_2.js"></script>
+  <script src="layers/PointKantorKec_3.js"></script>
+  <script src="layers/BalaiDesa_4.js"></script>
+  <script src="layers/Kuburan_5.js"></script>
+  <script src="layers/sekolah_6.js"></script>
+  <script src="layers/purwokertoutara_7.js"></script>
+  <script src="styles/purwanegara_1_style.js"></script>
+  <script src="styles/Desa_2_style.js"></script>
+  <script src="styles/PointKantorKec_3_style.js"></script>
+  <script src="styles/BalaiDesa_4_style.js"></script>
+  <script src="styles/Kuburan_5_style.js"></script>
+  <script src="styles/sekolah_6_style.js"></script>
+  <script src="styles/purwokertoutara_7_style.js"></script>
+  <script src="./layers/layers.js"></script>
+  <script src="./resources/Autolinker.min.js"></script>
+  <script src="./resources/qgis2web.js"></script>
+
+  <!-- Updated script for mobile menu toggle -->
+  <script>
+    lucide.createIcons();
+
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+
+    function updateView() {
+      const checkboxes = document.querySelectorAll('.desa-check');
+      let selectedDesa = [];
+      checkboxes.forEach(cb => {
+        if (cb.checked) selectedDesa.push(cb.value);
+      });
+      const label = document.getElementById('activeLocText');
+      if (selectedDesa.length > 0) {
+        label.innerText = "Desa: " + selectedDesa.join(', ');
+        document.getElementById('viewKec').checked = false;
+      } else {
+        label.innerText = "Kecamatan Purwokerto Utara";
+        document.getElementById('viewKec').checked = true;
+      }
+      try {
+        if (typeof lyr_purwokertoutara_7 !== 'undefined') {
+          lyr_purwokertoutara_7.setVisible(selectedDesa.length === 0);
+        }
+        if (typeof lyr_Desa_2 !== 'undefined') {
+          const sel = selectedDesa.slice();
+          lyr_Desa_2.setStyle(function (feature, resolution) {
+            if (sel.length === 0) return null;
+            var name = feature.get('NAME_4') || feature.get('NAME') || feature.get('name');
+            if (name && sel.indexOf(name) !== -1) {
+              return style_Desa_2(feature, resolution);
+            }
+            return null;
+          });
+          lyr_Desa_2.setVisible(true);
+        }
+      } catch (e) {
+        console.error('Error updating layers:', e);
+      }
+    }
+
+    function toggleLayer(viewName) {
+      if (viewName === 'Kecamatan') {
+        document.querySelectorAll('.desa-check').forEach(cb => cb.checked = false);
+        if (typeof lyr_purwokertoutara_7 !== 'undefined') lyr_purwokertoutara_7.setVisible(true);
+        if (typeof lyr_Desa_2 !== 'undefined') {
+          lyr_Desa_2.setStyle(function () { return null; });
+          lyr_Desa_2.setVisible(true);
+        }
+        document.getElementById('activeLocText').innerText = 'Kecamatan Purwokerto Utara';
+      }
+    }
+
+    function toggleFullScreen() {
+      var elem = document.getElementById("map");
+      if (!document.fullscreenElement) {
+        elem.requestFullscreen().catch(err => {
+          alert(`Error: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    window.onload = function () {
+      updateView();
+    }
+  </script>
+</body>
+
+</html>

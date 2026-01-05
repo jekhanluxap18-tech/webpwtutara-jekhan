@@ -1,0 +1,1 @@
+var json_BalaidesaGrendeng_3 = {"type":"FeatureCollection","name":"BalaidesaGrendeng_3","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":"1","nama":"Balai desa grendeng"},"geometry":{"type":"Point","coordinates":[109.247613488142051,-7.402331599419537]}}]}
