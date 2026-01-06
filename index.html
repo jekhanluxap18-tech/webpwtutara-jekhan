@@ -282,6 +282,25 @@
         
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('active');
+            menuBtn.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuBtn.classList.remove('active');
+            });
+        });
+
+        // Set active link based on current page
+        const currentLocation = location.pathname;
+        menuLinks.forEach(link => {
+            if (link.href.includes(currentLocation) || 
+                (currentLocation.includes('index.html') && link.href.includes('index.html'))) {
+                link.classList.add('active');
+            }
         });
 
         function openModal() {
